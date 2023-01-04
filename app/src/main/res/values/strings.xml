@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">BarcodeMapping</string>
+    <string name="signin_message">Sign in to start your session</string>
+    <string name="login_btn_label">Login</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="powered_by_label">Powered By</string>
+    <string name="invalid_username">Invalid Username</string>
+    <string name="invalid_password">Invallid Password</string>
+
+    <string name="select_operation_label">Select Operation</string>
+    <string name="add_inventory_label">Add Inventory</string>
+    <string name="search_product_label">Search Product</string>
+    <string name="po_number_hint">PO Number</string>
+    <string name="date_hint">Date</string>
+    <string name="category_hint">Category</string>
+    <string name="product_hint">Product</string>
+    <string name="make_hint">Make</string>
+    <string name="serial_no_hint">Serial Number</string>
+    <string name="receiver_hint">Receiver</string>
+    <string name="save_btn_label">Save</string>
+    <string name="menu_logout">Logout</string>
+</resources>

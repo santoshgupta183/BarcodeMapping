@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/operationSelectionFragment">
+
+    <fragment
+        android:id="@+id/operationSelectionFragment"
+        android:name="com.qikkle.barcodemapping.ui.fragments.operationSelection.OperationSelectionFragment"
+        android:label="@string/select_operation_label"
+        tools:layout="@layout/fragment_operation_selection">
+        <action
+            android:id="@+id/action_operationSelectionFragment_to_addInventoryFragment"
+            app:destination="@id/addInventoryFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_operationSelectionFragment_to_searchProductFragment"
+            app:destination="@id/searchProductFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/addInventoryFragment"
+        android:name="com.qikkle.barcodemapping.ui.fragments.addInventory.AddInventoryFragment"
+        android:label="@string/add_inventory_label"
+        tools:layout="@layout/fragment_add_inventory" />
+    <fragment
+        android:id="@+id/searchProductFragment"
+        android:name="com.qikkle.barcodemapping.ui.fragments.searchAsset.SearchAssetFragment"
+        android:label="@string/search_product_label"
+        tools:layout="@layout/fragment_search_product" />
+</navigation>
