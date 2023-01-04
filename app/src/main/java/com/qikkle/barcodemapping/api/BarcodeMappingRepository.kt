@@ -20,5 +20,11 @@ class BarcodeMappingRepository {
     suspend fun createAsset(createAssetPostBody: CreateAssetPostBody) =
         ApiClient.api.createAsset(createAssetPostBody)
 
+    suspend fun getCategories() = ApiClient.api.getCategories()
+
+    suspend fun getProducts(category:Long) = ApiClient.api.getProducts(category)
+
+    suspend fun getReceivers() = ApiClient.api.getReceivers(0)
+
 }
 

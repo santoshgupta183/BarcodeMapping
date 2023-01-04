@@ -1,5 +1,6 @@
 package com.qikkle.barcodemapping.ui.fragments.addInventory
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.os.Bundle
@@ -8,7 +9,6 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -25,6 +25,9 @@ class AddInventoryFragment: Fragment() {
     private var _binding: FragmentAddInventoryBinding? = null;
     private val binding get() = _binding!!
     private var calendar: Calendar = Calendar.getInstance()
+    private val categories = mutableListOf<String>()
+    private val products = mutableListOf<String>()
+    private val receivers = mutableListOf<String>()
 
     private lateinit var viewModel: AddInventoryViewModel
 
@@ -51,7 +54,8 @@ class AddInventoryFragment: Fragment() {
                 binding.etProduct.text.toString(),
                 binding.etMake.text.toString(),
                 binding.etReceiver.text.toString(),
-                binding.etSerialNo.text.toString()
+                binding.etSerialNo.text.toString(),
+                binding.etQuantity.text.toString()
             )
         }
     }
@@ -83,6 +87,7 @@ class AddInventoryFragment: Fragment() {
             etMake.addTextChangedListener(textWatcher)
             etSerialNo.addTextChangedListener(textWatcher)
             etReceiver.addTextChangedListener(textWatcher)
+            etQuantity.addTextChangedListener(textWatcher)
 
             scanIcon.setOnClickListener{
                 (requireActivity() as BarcodeMappingActivity).scanBarcode()
@@ -92,11 +97,9 @@ class AddInventoryFragment: Fragment() {
                 viewModel.saveAsset(
                     binding.etDate.text.toString(),
                     binding.etPoNumber.text.toString(),
-                    binding.etCategory.text.toString(),
-                    binding.etProduct.text.toString(),
                     binding.etMake.text.toString(),
-                    binding.etReceiver.text.toString(),
-                    binding.etSerialNo.text.toString()
+                    binding.etSerialNo.text.toString(),
+                    binding.etQuantity.text.toString()
                 )
             }
 
@@ -109,6 +112,18 @@ class AddInventoryFragment: Fragment() {
                     calendar.get(Calendar.MONTH),
                     calendar.get(Calendar.DAY_OF_MONTH)
                 ).show()
+            }
+
+            etCategory.setOnClickListener {
+                showCategoriesDialog()
+            }
+
+            etProduct.setOnClickListener {
+                showProductsDialog()
+            }
+
+            etReceiver.setOnClickListener {
+                showReceiversDialog()
             }
         }
 
@@ -125,6 +140,81 @@ class AddInventoryFragment: Fragment() {
 
         viewModel.getSaveBtnStatus().observe(viewLifecycleOwner){ enable->
             binding.btnSave.isEnabled = enable
+        }
+
+        viewModel.getCategoriesLiveData().observe(viewLifecycleOwner) { resource->
+            when(resource){
+                is Resource.Loading->{
+                    showProgressBar()
+                }
+                is Resource.Error -> {
+                    hideProgressBar()
+                    Snackbar.make(
+                        binding.root,
+                        resource.errorMessage!!,
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+                is Resource.Success -> {
+                    hideProgressBar()
+                    resource.data?.let {
+                        categories.clear()
+                        for (category in resource.data){
+                            categories.add(category.category)
+                        }
+                    }
+                }
+            }
+        }
+
+        viewModel.getProductsLiveData().observe(viewLifecycleOwner) { resource->
+            when(resource){
+                is Resource.Loading->{
+                    showProgressBar()
+                }
+                is Resource.Error -> {
+                    hideProgressBar()
+                    Snackbar.make(
+                        binding.root,
+                        resource.errorMessage!!,
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+                is Resource.Success -> {
+                    hideProgressBar()
+                    resource.data?.let {
+                        products.clear()
+                        for (product in resource.data){
+                            products.add(product.product)
+                        }
+                    }
+                }
+            }
+        }
+
+        viewModel.getReceiversLiveData().observe(viewLifecycleOwner) { resource->
+            when(resource){
+                is Resource.Loading->{
+                    showProgressBar()
+                }
+                is Resource.Error -> {
+                    hideProgressBar()
+                    Snackbar.make(
+                        binding.root,
+                        resource.errorMessage!!,
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+                is Resource.Success -> {
+                    hideProgressBar()
+                    resource.data?.let {
+                        receivers.clear()
+                        for (receiver in resource.data){
+                            receivers.add("${receiver.firstName} ${receiver.lastName}")
+                        }
+                    }
+                }
+            }
         }
 
         viewModel.getCreateAssetResult().observe(viewLifecycleOwner) { response->
@@ -162,5 +252,38 @@ class AddInventoryFragment: Fragment() {
         val myFormat = "yyyy-MM-dd"
         val dateFormat = SimpleDateFormat(myFormat, Locale.US)
         binding.etDate.setText(dateFormat.format(calendar.time))
+    }
+
+    private fun showCategoriesDialog(){
+        AlertDialog.Builder(requireContext())
+            .setTitle("Select Category")
+            .setItems(categories.toTypedArray()) { dialogInterface, index ->
+                binding.etCategory.setText(categories[index])
+                viewModel.onCategorySelected(categories[index], index)
+            }
+            .create()
+            .show()
+    }
+
+    private fun showProductsDialog(){
+        AlertDialog.Builder(requireContext())
+            .setTitle("Select Product")
+            .setItems(products.toTypedArray()) { dialogInterface, index ->
+                binding.etProduct.setText(products[index])
+                viewModel.onProductSelected(products[index], index)
+            }
+            .create()
+            .show()
+    }
+
+    private fun showReceiversDialog(){
+        AlertDialog.Builder(requireContext())
+            .setTitle("Select Receiver")
+            .setItems(receivers.toTypedArray()) { dialogInterface, index ->
+                binding.etReceiver.setText(receivers[index])
+                viewModel.onReceiverSelected(receivers[index], index)
+            }
+            .create()
+            .show()
     }
 }

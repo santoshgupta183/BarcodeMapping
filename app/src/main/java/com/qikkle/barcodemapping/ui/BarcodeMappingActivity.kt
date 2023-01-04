@@ -1,6 +1,7 @@
 package com.qikkle.barcodemapping.ui
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -13,7 +14,6 @@ import com.qikkle.barcodemapping.databinding.ActivityBarcodeMappingBinding
 import com.qikkle.barcodemapping.ui.login.LoginActivity
 import com.qikkle.barcodemapping.utils.PreferenceManager
 import com.rscja.barcode.BarcodeDecoder
-import com.rscja.barcode.BarcodeDecoder.DecodeCallback
 import com.rscja.barcode.BarcodeFactory
 
 class BarcodeMappingActivity : AppCompatActivity() {
@@ -21,6 +21,9 @@ class BarcodeMappingActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private var _binding: ActivityBarcodeMappingBinding? = null;
     private val binding get() = _binding!!
+    private val mediaPlayer by lazy {
+        MediaPlayer.create(this, R.raw.beep);
+    }
 
     private val barcodeReader by lazy {
         BarcodeFactory.getInstance().barcodeDecoder
@@ -48,6 +51,7 @@ class BarcodeMappingActivity : AppCompatActivity() {
                 } else {
                     listener.onScanFail()
                 }
+                playSound()
             }
 
         }
@@ -65,6 +69,7 @@ class BarcodeMappingActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_logout){
             PreferenceManager.remove(this, PreferenceManager.Keys.USER_ID)
+            PreferenceManager.remove(this, PreferenceManager.Keys.LOCATION_ID)
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
@@ -73,6 +78,12 @@ class BarcodeMappingActivity : AppCompatActivity() {
 
     fun scanBarcode(){
         barcodeReader.startScan()
+    }
+
+    private fun playSound() {
+        if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
+            mediaPlayer.start()
+        }
     }
 
     interface BarcodeListener {

@@ -72,6 +72,7 @@ class SearchAssetFragment: Fragment() {
                             binding.tvCategory.text = barcodeDetails.category
                             binding.tvProduct.text = barcodeDetails.product
                             binding.tvMake.text = barcodeDetails.make
+                            binding.tvSerialNo.text = barcodeDetails.serialNo
                         } else {
                             Snackbar.make(
                                 binding.root,

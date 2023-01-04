@@ -48,8 +48,9 @@ class LoginViewModel(
     private fun handleResponse(response: Response<LoginResponse>) : Resource<LoginResponse>{
         if (response.isSuccessful) {
             response.body()?.let { loginResponse ->
-                if (loginResponse.isNotEmpty()) {
-                    PreferenceManager.add(getApplication(), PreferenceManager.Keys.USER_ID, loginResponse[0].userId)
+                if (loginResponse.isSuccess()) {
+                    PreferenceManager.add(getApplication(), PreferenceManager.Keys.USER_ID, loginResponse.userId)
+                    PreferenceManager.add(getApplication(), PreferenceManager.Keys.LOCATION_ID, loginResponse.locationId)
                     return Resource.Success(loginResponse)
                 } else {
                     return Resource.Error("Invalid Credentials", null)
