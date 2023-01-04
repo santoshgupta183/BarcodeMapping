@@ -1,154 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/et_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/date_hint"
+                android:inputType="date"
+                android:focusable="false"
+                app:layout_constraintEnd_toStartOf="@+id/calender_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/calender_icon"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:padding="5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/et_date"
+                app:layout_constraintEnd_toEndOf="@+id/et_po_number"
+                app:layout_constraintTop_toTopOf="@+id/et_date"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/ic_calendar" />
+
+            <EditText
+                android:id="@+id/et_po_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/field_vertical_margin"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="@string/po_number_hint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_date" />
+
+            <EditText
+                android:id="@+id/et_category"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/field_vertical_margin"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="@string/category_hint"
+                android:focusable="false"
+                android:drawableEnd="@drawable/ic_arrow_drop_down"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_po_number" />
+
+            <EditText
+                android:id="@+id/et_product"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/field_vertical_margin"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="@string/product_hint"
+                android:focusable="false"
+                android:drawableEnd="@drawable/ic_arrow_drop_down"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_category" />
+
+            <EditText
+                android:id="@+id/et_make"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/field_vertical_margin"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="@string/make_hint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_product" />
+
+            <EditText
+                android:id="@+id/et_serial_no"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/field_vertical_margin"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="@string/serial_no_hint"
+                android:focusable="false"
+                app:layout_constraintEnd_toStartOf="@+id/scan_icon"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_make" />
+
+            <ImageView
+                android:id="@+id/scan_icon"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:padding="5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/et_serial_no"
+                app:layout_constraintEnd_toEndOf="@+id/et_make"
+                app:layout_constraintTop_toTopOf="@+id/et_serial_no"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/ic_qr_code_scanner" />
+
+            <EditText
+                android:id="@+id/et_receiver"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/field_vertical_margin"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="@string/receiver_hint"
+                android:focusable="false"
+                android:drawableEnd="@drawable/ic_arrow_drop_down"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_serial_no" />
+
+            <EditText
+                android:id="@+id/et_quantity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/field_vertical_margin"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="@string/quantity_hint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_receiver" />
+
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/btn_vertical_margin"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp"
+                android:text="@string/save_btn_label"
+                android:textSize="20sp"
+                android:enabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_quantity" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <include
+        android:id="@+id/loading"
+        layout="@layout/loading_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp">
-
-        <EditText
-            android:id="@+id/et_date"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/date_hint"
-            android:inputType="date"
-            android:enabled="false"
-            app:layout_constraintEnd_toStartOf="@+id/calender_icon"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/calender_icon"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
-            android:padding="5dp"
-            app:layout_constraintBottom_toBottomOf="@+id/et_date"
-            app:layout_constraintEnd_toEndOf="@+id/et_po_number"
-            app:layout_constraintTop_toTopOf="@+id/et_date"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/ic_calendar" />
-
-        <EditText
-            android:id="@+id/et_po_number"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/field_vertical_margin"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="@string/po_number_hint"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_date" />
-
-        <EditText
-            android:id="@+id/et_category"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/field_vertical_margin"
-            android:ems="10"
-            android:inputType="number"
-            android:hint="@string/category_hint"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_po_number" />
-
-        <EditText
-            android:id="@+id/et_product"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/field_vertical_margin"
-            android:ems="10"
-            android:inputType="number"
-            android:hint="@string/product_hint"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_category" />
-
-        <EditText
-            android:id="@+id/et_make"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/field_vertical_margin"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="@string/make_hint"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_product" />
-
-        <EditText
-            android:id="@+id/et_serial_no"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/field_vertical_margin"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="@string/serial_no_hint"
-            android:enabled="false"
-            app:layout_constraintEnd_toStartOf="@+id/scan_icon"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_make" />
-
-        <ImageView
-            android:id="@+id/scan_icon"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
-            android:padding="5dp"
-            app:layout_constraintBottom_toBottomOf="@+id/et_serial_no"
-            app:layout_constraintEnd_toEndOf="@+id/et_make"
-            app:layout_constraintTop_toTopOf="@+id/et_serial_no"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/ic_qr_code_scanner" />
-
-        <EditText
-            android:id="@+id/et_receiver"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/field_vertical_margin"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="@string/receiver_hint"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_serial_no" />
-
-        <Button
-            android:id="@+id/btn_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/btn_vertical_margin"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
-            android:text="@string/save_btn_label"
-            android:textSize="20sp"
-            android:enabled="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_receiver" />
-
-        <include
-            android:id="@+id/loading"
-            layout="@layout/loading_bar_layout"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+        android:visibility="gone" />
+</RelativeLayout>

@@ -20,4 +20,5 @@
     <string name="receiver_hint">Receiver</string>
     <string name="save_btn_label">Save</string>
     <string name="menu_logout">Logout</string>
+    <string name="quantity_hint">Enter Quantity</string>
 </resources>

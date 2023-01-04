@@ -73,5 +73,6 @@ class PreferenceManager {
 
     object Keys {
         const val USER_ID = "user_id"
+        const val LOCATION_ID = "location_id"
     }
 }
